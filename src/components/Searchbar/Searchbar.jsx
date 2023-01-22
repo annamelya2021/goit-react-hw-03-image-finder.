@@ -22,12 +22,3 @@ const Searchbar = ({ onClick }) => {
   );
 };
 export default Searchbar;
-
-// e => {
-//     e.preventDefault();
-//     onClick(e.target.elements.request.value.trim());
-
-//     if (e.target.elements.request.value.trim() === '') {
-//       return Notify.failure('empty');
-//     }
-//   }
