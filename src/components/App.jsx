@@ -30,6 +30,7 @@ class App extends Component {
       this.setState(prevState => ({
         allImages: [...prevState.allImages, ...result.hits],
       }));
+
       this.setState({ reqStatus: null });
     }
   }
@@ -40,6 +41,14 @@ class App extends Component {
     console.log('request :>> ', request);
   };
 
+  onClick = e => {
+    e.preventDefault();
+    this.onHandleSubmit(e.target.elements.request.value.trim());
+    if (e.target.elements.request.value.trim() === '') {
+      return Notify.failure('empty');
+    }
+    e.target.elements.request.value = '';
+  };
   onLoadMore = () => {
     this.setState(prevState => ({ page: prevState.page + 1 }));
   };
@@ -50,16 +59,7 @@ class App extends Component {
 
     return (
       <div className={css.App}>
-        <Searchbar
-          onClick={e => {
-            e.preventDefault();
-            this.onHandleSubmit(e.target.elements.request.value.trim());
-
-            if (e.target.elements.request.value.trim() === '') {
-              return Notify.failure('empty');
-            }
-          }}
-        />
+        <Searchbar onClick={this.onClick} />
         <ImageGallery data={allImages} onClick={this.onImageClick} />
         {selectedImage && (
           <Modal link={selectedImage} modalToggle={this.onImageClick} />
