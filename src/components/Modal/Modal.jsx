@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { createPortal } from 'react-dom';
-import css from "./Modal.module.css"
+import css from './Modal.module.css';
 
 const modalRoot = document.querySelector('#modal-root');
 
@@ -17,26 +17,26 @@ class Modal extends Component {
     if (e.code === 'Escape') {
       console.log('Нажали ESC, нужно закрыть модалку');
 
-      this.props.modalToggle(null);
+      this.props.onImageClick();
     }
   };
 
   handleBackdropClick = event => {
     if (event.currentTarget === event.target) {
-      this.props.modalToggle(null);
+      this.props.onImageClick();
     }
   };
 
   render() {
     return createPortal(
-        <div className={css.Overlay} onClick={this.handleBackdropClick}>
-            <div className={css.Modal}>
-                <img src={this.props.link} alt=""></img>
-            </div>
-        </div>,
-      modalRoot,
+      <div className={css.Overlay} onClick={this.handleBackdropClick}>
+        <div className={css.Modal}>
+          <img src={this.props.Imglink} alt=""></img>
+        </div>
+      </div>,
+      modalRoot
     );
   }
 }
 
-export { Modal }
+export { Modal };

@@ -11,8 +11,8 @@ import { Notify } from 'notiflix';
 class App extends Component {
   state = {
     allImages: [],
-    selectedImage: null,
-    reqStatus: null,
+    selectedImage: '',
+    reqStatus: '',
     request: '',
     page: 1,
   };
@@ -55,16 +55,17 @@ class App extends Component {
 
   render() {
     const { allImages, selectedImage, reqStatus } = this.state;
-    const shouldLoadMore = Boolean(allImages.length);
 
     return (
       <div className={css.App}>
         <Searchbar onClick={this.onClick} />
         <ImageGallery data={allImages} onClick={this.onImageClick} />
         {selectedImage && (
-          <Modal link={selectedImage} modalToggle={this.onImageClick} />
+          <Modal Imglink={selectedImage} onImageClick={this.onImageClick} />
         )}
-        {shouldLoadMore && !reqStatus && <Button onClick={this.onLoadMore} />}
+        {allImages.length > 0 && !reqStatus && (
+          <Button onClick={this.onLoadMore} />
+        )}
         {reqStatus && <Loader />}
       </div>
     );
