@@ -1,13 +1,10 @@
 import css from './ImageGallery.module.css';
-import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
-console.log(css);
+import { ImageGalleryItem } from './ImageGalleryItem/ImageGalleryItem';
 
-const ImageGallery = () => {
+export const ImageGallery = ({ data, onClick }) => {
   return (
-    <ul class="gallery">
-      <ImageGalleryItem></ImageGalleryItem>
+    <ul className={css.ImageGallery}>
+      <ImageGalleryItem data={data} onClick={onClick} />
     </ul>
   );
 };
-
-export default ImageGallery;
