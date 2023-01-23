@@ -15,6 +15,7 @@ class App extends Component {
     reqStatus: '',
     request: '',
     page: 1,
+    totalImages: 0,
   };
 
   onImageClick = image => {
@@ -29,6 +30,7 @@ class App extends Component {
       const result = await fetchImages(request, page);
       this.setState(prevState => ({
         allImages: [...prevState.allImages, ...result.hits],
+        totalImages: result.totalHits,
       }));
 
       this.setState({ reqStatus: null });
@@ -36,7 +38,7 @@ class App extends Component {
   }
 
   onHandleSubmit = request => {
-    this.setState({ allImages: [], request: request });
+    this.setState({ allImages: [], request: request, totalImages: 0 });
     console.dir(request);
     console.log('request :>> ', request);
   };
@@ -47,15 +49,15 @@ class App extends Component {
     if (e.target.elements.request.value.trim() === '') {
       return Notify.failure('empty');
     }
-    e.target.elements.request.value = '';
+    // e.target.elements.request.value = '';
   };
   onLoadMore = () => {
     this.setState(prevState => ({ page: prevState.page + 1 }));
   };
 
   render() {
-    const { allImages, selectedImage, reqStatus } = this.state;
-
+    const { allImages, selectedImage, reqStatus, totalImages } = this.state;
+    const showBtn = allImages.length < totalImages;
     return (
       <div className={css.App}>
         <Searchbar onClick={this.onClick} />
@@ -63,7 +65,7 @@ class App extends Component {
         {selectedImage && (
           <Modal Imglink={selectedImage} onImageClick={this.onImageClick} />
         )}
-        {allImages.length > 0 && !reqStatus && (
+        {allImages.length > 0 && !reqStatus && showBtn && (
           <Button onClick={this.onLoadMore} />
         )}
         {reqStatus && <Loader />}
