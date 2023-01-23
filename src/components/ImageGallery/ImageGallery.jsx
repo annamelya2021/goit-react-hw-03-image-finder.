@@ -1,10 +1,16 @@
-import css from './ImageGallery.module.css';
-import { ImageGalleryItem } from './ImageGalleryItem/ImageGalleryItem';
+import { ImageGallerySt } from './ImageGallery.styled';
+import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';
+import PropTypes from 'prop-types';
 
-export const ImageGallery = ({ data, onClick }) => {
+const ImageGallery = ({ data, onClick }) => {
   return (
-    <ul className={css.ImageGallery}>
+    <ImageGallerySt>
       <ImageGalleryItem data={data} onClick={onClick} />
-    </ul>
+    </ImageGallerySt>
   );
 };
+ImageGallery.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  data: PropTypes.array.isRequired,
+};
+export default ImageGallery;

@@ -1,13 +1,13 @@
 import { Component } from 'react';
-import css from './Loader.module.css';
+import { LoaderSt } from './Loader.styled';
 import { InfinitySpin } from 'react-loader-spinner';
 
 class Loader extends Component {
   render() {
     return (
-      <div className={css.Loader}>
+      <LoaderSt>
         <InfinitySpin color="#6562a4" />
-      </div>
+      </LoaderSt>
     );
   }
 }
