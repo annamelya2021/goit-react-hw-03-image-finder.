@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/qwe/static/css/main.3fa10257.css",
-    "main.js": "/qwe/static/js/main.0bff58c5.js",
+    "main.js": "/qwe/static/js/main.b2e34680.js",
     "index.html": "/qwe/index.html",
     "main.3fa10257.css.map": "/qwe/static/css/main.3fa10257.css.map",
-    "main.0bff58c5.js.map": "/qwe/static/js/main.0bff58c5.js.map"
+    "main.b2e34680.js.map": "/qwe/static/js/main.b2e34680.js.map"
   },
   "entrypoints": [
     "static/css/main.3fa10257.css",
-    "static/js/main.0bff58c5.js"
+    "static/js/main.b2e34680.js"
   ]
 }
