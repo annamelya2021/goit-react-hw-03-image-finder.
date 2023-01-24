@@ -72,6 +72,7 @@ class App extends Component {
     e.preventDefault();
     const myQuery = e.target.elements.request.value.trim();
     if (!myQuery) {
+      this.setState({ allImages: [], totalImages: 0 });
       return Notify.failure('Пусте поле, введіть запит');
     }
     this.onHandleSubmit(myQuery);
