@@ -71,10 +71,10 @@ class App extends Component {
   onClick = e => {
     e.preventDefault();
     const myQuery = e.target.elements.request.value.trim();
-    this.onHandleSubmit(myQuery);
     if (!myQuery) {
       return Notify.failure('Пусте поле, введіть запит');
     }
+    this.onHandleSubmit(myQuery);
   };
   onLoadMore = () => {
     this.setState(prevState => ({ page: prevState.page + 1 }));
