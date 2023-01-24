@@ -10,8 +10,8 @@ const ImageGalleryItem = ({ data, onClick }) => {
       {data.map(({ id, tags, webformatURL, largeImageURL }) => (
         <ImageGalleryItemSt key={id}>
           <ImageGalleryImage
-            onClick={() => onClick(webformatURL)}
-            src={largeImageURL}
+            onClick={() => onClick(largeImageURL)}
+            src={webformatURL}
             alt={tags}
           />
         </ImageGalleryItemSt>
