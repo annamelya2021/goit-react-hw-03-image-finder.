@@ -16,29 +16,56 @@ class App extends Component {
     request: '',
     page: 1,
     totalImages: 0,
+    // isLoading: false,
   };
 
   onImageClick = image => {
     this.setState({ selectedImage: image });
   };
 
-  async componentDidUpdate(_, prevState) {
+  // async componentDidUpdate(_, prevState) {
+  //   const { request, page } = this.state;
+
+  //   if (prevState.request !== request || prevState.page !== page) {
+  //     this.setState({ reqStatus: 'loading' });
+  //     const result = await fetchImages(request, page);
+  //     this.setState(prevState => ({
+  //       allImages: [...prevState.allImages, ...result.hits],
+  //       totalImages: result.totalHits,
+  //     }));
+
+  //     this.setState({ reqStatus: null });
+  //   }
+  // }
+
+  componentDidUpdate(_, prevState) {
     const { request, page } = this.state;
-
     if (prevState.request !== request || prevState.page !== page) {
-      this.setState({ reqStatus: 'loading' });
-      const result = await fetchImages(request, page);
-      this.setState(prevState => ({
-        allImages: [...prevState.allImages, ...result.hits],
-        totalImages: result.totalHits,
-      }));
-
-      this.setState({ reqStatus: null });
+      this.getImage();
     }
   }
+  getImage = async () => {
+    const { request, page } = this.state;
+    this.setState({ reqStatus: 'loading' });
+    try {
+      const result = await fetchImages(request, page);
+      if (result.totalHits > 0) {
+        this.setState(prevState => ({
+          allImages: [...prevState.allImages, ...result.hits],
+          totalImages: result.totalHits,
+        }));
+      } else {
+        return Notify.failure('ввведіть запит повторно');
+      }
+    } catch (error) {
+      Notify.failure('Помилка запиту');
+    } finally {
+      this.setState({ reqStatus: null });
+    }
+  };
 
   onHandleSubmit = request => {
-    this.setState({ allImages: [], request: request, totalImages: 0 });
+    this.setState({ allImages: [], request: request, totalImages: 0, page: 1 });
   };
 
   onClick = e => {
@@ -46,7 +73,7 @@ class App extends Component {
     const myQuery = e.target.elements.request.value.trim();
     this.onHandleSubmit(myQuery);
     if (!myQuery) {
-      return Notify.failure('empty');
+      return Notify.failure('Пусте поле, введіть запит');
     }
   };
   onLoadMore = () => {
