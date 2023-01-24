@@ -16,27 +16,11 @@ class App extends Component {
     request: '',
     page: 1,
     totalImages: 0,
-    // isLoading: false,
   };
 
   onImageClick = image => {
     this.setState({ selectedImage: image });
   };
-
-  // async componentDidUpdate(_, prevState) {
-  //   const { request, page } = this.state;
-
-  //   if (prevState.request !== request || prevState.page !== page) {
-  //     this.setState({ reqStatus: 'loading' });
-  //     const result = await fetchImages(request, page);
-  //     this.setState(prevState => ({
-  //       allImages: [...prevState.allImages, ...result.hits],
-  //       totalImages: result.totalHits,
-  //     }));
-
-  //     this.setState({ reqStatus: null });
-  //   }
-  // }
 
   componentDidUpdate(_, prevState) {
     const { request, page } = this.state;
